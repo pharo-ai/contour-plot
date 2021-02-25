@@ -11,6 +11,70 @@ Class {
 	#category : #'AI-ContourPlot'
 }
 
+{ #category : #examples }
+AIContourPlot class >> example [
+	<example>
+	| numberOfPoints color1 color2 mu1 mu2 sigma1 sigma2 dist1 dist2 data1 data2 scatterplot1 scatterplot2 contour1 contour2 chart |
+	
+	numberOfPoints := 100.
+
+	color1 := Color fromString: '3288BD'.
+	color2 := Color fromString: 'D53E4F'.
+
+	mu1 := #(1 0) asPMVector.
+	mu2 := #(-1.5 -1) asPMVector.
+
+	sigma1 := PMMatrix rows: #(
+		(0.5 1)
+		(1 3)).
+	
+	sigma2 := PMMatrix rows: #(
+		(1 0.8)
+		(0.8 1)).
+
+	dist1 := PMMultivariateNormalDistribution
+		meanVector: mu1
+		covarianceMatrix: sigma1.
+	
+	dist2 := PMMultivariateNormalDistribution
+		meanVector: mu2
+		covarianceMatrix: sigma2.
+	
+	data1 := (1 to: numberOfPoints) collect: [ :i | dist1 random ].
+	data2 := (1 to: numberOfPoints) collect: [ :i | dist2 random ].
+
+	scatterplot1 := RSScatterPlot new
+		x: (data1 collect: #first)
+		y: (data1 collect: #second);
+		color: color1;
+		yourself.
+	
+	scatterplot2 := RSScatterPlot new
+		x: (data2 collect: #first)
+		y: (data2 collect: #second);
+		color: color2;
+		yourself.
+	
+	contour1 := AIContourPlot new
+		distribution: dist1;
+		yourself.
+	
+	contour2 := AIContourPlot new
+		distribution: dist2;
+		yourself.
+
+	chart := RSChart new
+		addPlot: scatterplot1;
+		addPlot: scatterplot2;
+		addPlot: contour1;
+		addPlot: contour2;
+		addDecoration: RSHorizontalTick new;
+		addDecoration: RSVerticalTick new;
+		build.
+	
+	chart open
+]
+
 { #category : #initialization }
 AIContourPlot >> defaultShape [
 	"No idea how this is used"
