@@ -14,11 +14,11 @@ BaselineOfAIContourPlot >> baseline: spec [
 			with: [ spec repository: 'github://olekscode/PolyMath:master/src' ].
 			
 		spec
-			baseline: 'PolyMath'
+			baseline: 'Roassal3'
 			with: [ spec repository: 'github://ObjectProfile/Roassal3/src' ].
 			
 		"Packages"
 		spec 
-			package: 'AI-ContourPlot';
+			package: 'AI-ContourPlot' with: [ spec requires: #('PolyMath' 'Roassal3') ];
 			package: 'AI-ContourPlot-Tests' with: [ spec requires: #('AI-ContourPlot') ] ].
 ]
