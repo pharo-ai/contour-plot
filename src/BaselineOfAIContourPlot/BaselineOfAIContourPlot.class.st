@@ -11,7 +11,7 @@ BaselineOfAIContourPlot >> baseline: spec [
 		"External dependencies"
 		spec
 			baseline: 'PolyMath'
-			with: [ spec repository: 'github://olekscode/PolyMath:master/src' ].
+			with: [ spec repository: 'github://PolyMathOrg/PolyMath/src' ].
 			
 		spec
 			baseline: 'Roassal3'
